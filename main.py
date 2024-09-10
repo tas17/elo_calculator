@@ -35,10 +35,14 @@ def main(infile: str, initializer_file: str | None = None):
 
         new_winner_elo = winner_elo + 1 - p_w
         new_looser_elo = looser_elo - p_l
-        print(f"{winner} ({round(winner_elo, ROUNDING)}) wins against {looser} ({round(looser_elo, ROUNDING)}). New elos: {round(new_winner_elo, ROUNDING)}, {round(new_looser_elo, ROUNDING)}")
+        print(f"{winner} ({round(winner_elo, ROUNDING)}) wins against {looser} ({round(looser_elo, ROUNDING)}). New elos: {round(new_winner_elo, ROUNDING)} - {round(new_looser_elo, ROUNDING)}")
 
         set_elo(winner, new_winner_elo)
         set_elo(looser, new_looser_elo)
+
+    print("\nRatings")
+    for i, (name, elo) in enumerate(sorted(ELOS.items(), key=lambda x: -x[1])):
+        print(f"- {i+1}) {name} ({round(elo, ROUNDING)})")
 
 
 if __name__ == "__main__":
