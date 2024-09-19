@@ -1,5 +1,6 @@
 import pandas as pd
 import typer
+from datetime import date as date_calculator
 
 
 INITIAL_ELO = 100
@@ -23,7 +24,7 @@ def main(infile: str, initializer_file: str | None = None):
     with open(infile) as f:
         lines = f.readlines()
     for line in lines[1:]:
-        p1, p2, score, date = line.rstrip('\n').split(SEPARATOR)
+        p1, p2, score, date, *rest = line.rstrip('\n').split(SEPARATOR)
         if score == "1-0":
             winner = p1
             looser = p2
@@ -70,7 +71,7 @@ def main(infile: str, initializer_file: str | None = None):
             set_elo(p1, new_p1_elo)
             set_elo(p2, new_p2_elo)
 
-    print("\nRatings")
+    print(f"\nRatings ({date_calculator.today()})")
     for i, (name, elo) in enumerate(sorted(ELOS.items(), key=lambda x: -x[1])):
         print(f"- {i+1}) {name} ({round(elo, ROUNDING)})")
 
