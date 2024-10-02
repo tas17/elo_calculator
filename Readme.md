@@ -11,10 +11,12 @@ poetry run python main.py <file>
 
 File should be a csv of the form:
 ```
-Winner,Loser
-name1,name2
-name3,name4
+White,Black,Score,Date(optional)
+name1,name2,1-0
+name3,name4,0-1
 ```
+
+Elligible scores are "1-0", "0-1" and "1-1".
 
 ## How it works
 Elo system converges to a state where if player B has a score of P, then:
