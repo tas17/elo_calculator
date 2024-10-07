@@ -25,17 +25,18 @@ def main(infile: str, initializer_file: str | None = None):
         lines = f.readlines()
     for line in lines[1:]:
         p1, p2, score, date, *rest = line.rstrip('\n').split(SEPARATOR)
-        if score == "1-0":
-            winner = p1
-            looser = p2
-        elif score == "0-1":
-            winner = p2
-            looser = p1
-        elif score == "1-1":
-            winner = None
-            looser = None
-        else:
-            raise ValueError(f"Unexpcted value for {score=}")
+        if p1 and p2 and score:
+            if score == "1-0":
+                winner = p1
+                looser = p2
+            elif score == "0-1":
+                winner = p2
+                looser = p1
+            elif score == "1-1":
+                winner = None
+                looser = None
+            else:
+                raise ValueError(f"Unexpcted value for {score=}")
 
         if winner:
             winner_elo = get_elo(winner)
